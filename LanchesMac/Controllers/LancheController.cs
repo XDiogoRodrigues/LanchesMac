@@ -22,7 +22,7 @@ namespace LanchesMac.Controllers
             if (string.IsNullOrEmpty(categoria))
             {
                 lanches = _lancheRepository.Lanches.OrderBy(l => l.LancheId);
-                categoria = "Todos os Lanches";
+                categoriaAtual = "Todos os Lanches";
                
             }
             else

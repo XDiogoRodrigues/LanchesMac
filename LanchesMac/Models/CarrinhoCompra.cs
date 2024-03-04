@@ -39,21 +39,21 @@ public class CarrinhoCompra
 
     public void AdicionarAoCarrinho(Lanche lanche)
     {
-        var carrinhoCompraItem = _context.ItensDoCarrinho.SingleOrDefault(s => s.Lanche.LancheId == lanche.LancheId && s.CarrinhoCompraId == CarrinhoCompraId);
+        var itemParaCarrinho = _context.ItensDoCarrinho.SingleOrDefault(s => s.Lanche.LancheId == lanche.LancheId && s.CarrinhoCompraId == CarrinhoCompraId);
 
-        if(carrinhoCompraItem == null)
+        if(itemParaCarrinho == null)
         {
-            carrinhoCompraItem = new ItemDoCarrinho
+            itemParaCarrinho = new ItemDoCarrinho
             {
                 CarrinhoCompraId = CarrinhoCompraId,
                 Lanche = lanche,
                 Quantidade = 1
             };
-            _context.ItensDoCarrinho.Add(carrinhoCompraItem);
+            _context.ItensDoCarrinho.Add(itemParaCarrinho);
         }
         else
         {
-            carrinhoCompraItem.Quantidade++;
+            itemParaCarrinho.Quantidade++;
         }
         _context.SaveChanges();
     }
@@ -63,7 +63,7 @@ public class CarrinhoCompra
         var carrinhoCompraItem = _context.ItensDoCarrinho.SingleOrDefault(s => s.Lanche.LancheId == lanche.LancheId && s.CarrinhoCompraId == CarrinhoCompraId);
 
 
-        if(carrinhoCompraItem == null)
+        if(carrinhoCompraItem != null)
         {
             if(carrinhoCompraItem.Quantidade > 1)
             {
